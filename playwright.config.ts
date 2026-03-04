@@ -12,7 +12,7 @@ module.exports = defineConfig({
   },
   reportSlowTests: null,
 
-  workers: process.env.FUNCTIONAL_TESTS_WORKERS ? 5 : 5,
+  workers: process.env.FUNCTIONAL_TESTS_WORKERS ? 1 : 1,
   reporter: process.env.CI ? "html" : "html",
   projects: [
     {

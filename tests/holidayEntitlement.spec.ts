@@ -110,6 +110,8 @@ test.describe('Holiday entitlement ', () => {
         await daysInShiftPatternPage.inputDaysInShiftPattern(page);
         await daysInShiftPatternPage.continueOn(page);
 
+        const calculatedEntitlementPage: calculatedEntitlementPage = new CalculatedEntitlementPage();
+        await calculatedEntitlementPage.checkStartAndLeaveSameYearShiftPatternPageLoads(page);
     });
 
 

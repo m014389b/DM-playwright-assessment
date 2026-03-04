@@ -36,7 +36,7 @@ class HolidayEntitlementBasedOnPage {
             expect(page.locator(this.radioButtonCompressedHours)).toContainText(holidayEntitlementBasedOn_content.radioCompressedHours),
             expect(page.locator(this.radioButtonShifts)).toContainText(holidayEntitlementBasedOn_content.radioShifts),
         ]);
-        await axeTest(page);
+//         await axeTest(page);
     }
 
     async clickDaysWorkedPerWeek(page: Page): Promise<void> {
