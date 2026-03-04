@@ -1,0 +1,17 @@
+{
+  "name": "DM Playwright assessment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "packageManager": "yarn@4.3.1",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.9.1",
+    "@playwright/test": "^1.45.3",
+    "@types/node": "^20.14.11",
+    "playwright": "^1.45.3",
+    "typescript": "^5.5.4"
+  },
+  "scripts": {
+    "test": "playwright test --project chromium --headed"
+  }
+}
