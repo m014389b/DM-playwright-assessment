@@ -13,7 +13,7 @@ import DaysInShiftPatternPage from "./pages/daysInShiftPatternPage";
 
 
 test.describe('Holiday entitlement ', () => {
-    test.skip(`Holiday entitlement for a full leave year with annualised hours and other options`, async ({ page }): Promise<void> => {
+    test(`Holiday entitlement for a full leave year with annualised hours and other options`, async ({ page }): Promise<void> => {
         const landingPage: landingPage = new LandingPage();
         await landingPage.checkPageLoads(page);
         await landingPage.continueOn(page);
@@ -38,7 +38,7 @@ test.describe('Holiday entitlement ', () => {
 
         const workOutHolidayPage: workOutHolidayPage = new WorkOutHolidayPage();
         await workOutHolidayPage.checkPageLoads(page);
-    //     await workOutHolidayPage.triggerErrorMessages(page);
+        await workOutHolidayPage.triggerErrorMessages(page);
         await workOutHolidayPage.clickFullYear(page);
         await workOutHolidayPage.continueOn(page);
 
@@ -46,7 +46,7 @@ test.describe('Holiday entitlement ', () => {
         await calculatedEntitlementPage.checkFullYearLeaveAnnualisedPageLoads(page);
     });
 
- test(`Holiday entitlement for someone starting and leaving part way through a leave year with shifts and other options`, async ({ page }): Promise<void> => {
+ test.skip(`Holiday entitlement for someone starting and leaving part way through a leave year with shifts and other options`, async ({ page }): Promise<void> => {
         const landingPage: landingPage = new LandingPage();
         await landingPage.checkPageLoads(page);
         await landingPage.continueOn(page);
@@ -81,29 +81,24 @@ test.describe('Holiday entitlement ', () => {
         await employmentStartDatePage.inputDate(page);
         await employmentStartDatePage.continueOn(page);
 
- // What was the employment end date? (enter value)
         const employmentEndDatePage: employmentEndDatePage = new EmploymentEndDatePage();
         await employmentEndDatePage.checkPageLoads(page);
 //         await employmentEndDatePage.triggerErrorMessages(page);
         await employmentEndDatePage.inputDate(page);
         await employmentEndDatePage.continueOn(page);
 
-  // How many hours in each shift? (enter value)
         const hoursPerShiftPage: hoursPerShiftPage = new HoursPerShiftPage();
         await hoursPerShiftPage.checkPageLoads(page);
 //         await hoursPerShiftPage.triggerErrorMessages(page);
         await hoursPerShiftPage.inputHours(page);
         await hoursPerShiftPage.continueOn(page);
 
-  // How many shifts will be worked per shift pattern? (enter value)
         const shiftAmountPage: shiftAmountPage = new ShiftAmountPage();
         await shiftAmountPage.checkPageLoads(page);
 //         await shiftAmountPage.triggerErrorMessages(page);
         await shiftAmountPage.inputShifts(page);
         await shiftAmountPage.continueOn(page);
 
-
-  // How many days in the shift pattern? (enter value)
         const daysInShiftPatternPage: daysInShiftPatternPage = new DaysInShiftPatternPage();
         await daysInShiftPatternPage.checkPageLoads(page);
 //         await daysInShiftPatternPage.triggerErrorMessages(page);

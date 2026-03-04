@@ -20,9 +20,9 @@ class CalculatedEntitlementPage {
             expect(page.locator(this.text)).toContainText(fullYearLeaveAnnualised_calculatedEntitlement_content.calculationText),
             expect(page.locator(this.text)).toContainText(common_calculatedEntitlement_content.rulesText),
             expect(page.locator(this.text)).toContainText(common_calculatedEntitlement_content.employerListText),
+            expect(page.locator(this.text)).toContainText(common_calculatedEntitlement_content.employerListText2),
             expect(page.locator(this.text)).toContainText(fullYearLeaveAnnualised_calculatedEntitlement_content.employerListText),
             expect(page.locator(this.text)).toContainText(fullYearLeaveAnnualised_calculatedEntitlement_content.employerListText2),
-            expect(page.locator(this.text)).toContainText(fullYearLeaveAnnualised_calculatedEntitlement_content.employerListText3),
 
             expect(page.locator(this.text)).toContainText(fullYearLeaveAnnualised_calculatedEntitlement_content.userText),
             expect(page.locator(this.text)).toContainText(fullYearLeaveAnnualised_calculatedEntitlement_content.userListText),
@@ -38,7 +38,7 @@ class CalculatedEntitlementPage {
             expect(page.locator(this.text)).toContainText(common_calculatedEntitlement_content.rulesText),
             expect(page.locator(this.text)).toContainText(partYearShiftPattern_calculatedEntitlement_content.employerListText),
             expect(page.locator(this.text)).toContainText(partYearShiftPattern_calculatedEntitlement_content.employerListText2),
-            expect(page.locator(this.text)).toContainText(partYearShiftPattern_calculatedEntitlement_content.employerListText3),
+            expect(page.locator(this.text)).toContainText(common_calculatedEntitlement_content.employerListText2),
 
             expect(page.locator('a', { hasText: common_calculatedEntitlement_content.calculatorHomePageLinkText })).toHaveAttribute('href', 'https://www.gov.uk/calculate-your-holiday-entitlement/y' ),
             expect(page.locator('a', { hasText: common_calculatedEntitlement_content.holidayPayLinkText })).toHaveAttribute('href', '/holiday-entitlement-rights/holiday-pay-the-basics'),

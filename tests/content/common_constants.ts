@@ -4,10 +4,3 @@ export class CommonConstants {
     static readonly TEXT_CLASS: string = ".govuk-hint";
     static readonly CONTINUE_BUTTON_TEXT: string = "Continue";
 }
-
-export type ErrorMessage = {
-           errorBannerClass: string;
-           errorBannerText: string;
-           errorMessageClass: string;
-           errorMessageText: string;
-}

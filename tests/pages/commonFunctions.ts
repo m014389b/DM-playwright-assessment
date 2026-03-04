@@ -8,19 +8,10 @@ export class CommonFunctions {
         page.getByRole("button", { name: continuePageText}).click();
     }
 
-    static async triggerErrorMessages(page: Page, errorMessage: ErrorMessage): Promise<void> {
+    static async triggerErrorMessages(page: Page, errorBannerClass: string, errorBannerText :string, errorMessageClass: string, errorMessageText: string): Promise<void> {
         Promise.all([
-            expect(page.locator(errorMessage.errorBannerClass)).toHaveText(errorMessage.errorBannerText),
-            expect(page.locator(errorMessage.errorMessageClass)).toContainText(errorMessage.errorMessageText),
+            expect(page.locator(errorBannerClass)).toHaveText(errorBannerText),
+            expect(page.locator(errorMessageClass)).toContainText(errorMessageText),
         ]);
-    }
-
-    static errorMessageFactory(errorBannerClass: string, errorBannerText: string, errorMessageClass: string, errorMessageText: string): ErrorMessage {
-     return {
-         errorBannerClass: errorBannerClass,
-         errorBannerText: errorBannerText,
-         errorMessageClass: errorMessageClass,
-         errorMessageText: errorMessageText
-         } as ErrorMessage;
     }
 }

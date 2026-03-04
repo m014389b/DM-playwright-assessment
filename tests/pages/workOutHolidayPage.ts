@@ -65,17 +65,16 @@ class WorkOutHolidayPage {
     }
 
     async continueOn(page: Page): Promise<void> {
-//         CommonFunctions.continueOn(page, this.continueButtonLabel);
-                await page.getByRole("button", { name: "Continue" }).click();
+        CommonFunctions.continueOn(page, this.continueButtonLabel);
     }
 
     async triggerErrorMessages(page: Page): Promise<void> {
         await this.continueOn(page);
-            await Promise.all([
-                    expect(page.locator(this.errorBanner)).toHaveText(workoutHoliday_content.errorBanner),
-                    expect(page.locator(this.errorMessage)).toContainText(workoutHoliday_content.errorMessage),
-                ]);
-//         await CommonFunctions.triggerErrorMessages(page, CommonFunctions.errorMessageFactory(this.errorBanner, workoutHoliday_content.errorBanner, this.errorMessage, workoutHoliday_content.errorMessage));
+        await CommonFunctions.triggerErrorMessages(page, this.errorBanner, workoutHoliday_content.errorBanner, this.errorMessage, workoutHoliday_content.errorMessage)
+//             await Promise.all([
+//                     expect(page.locator(this.errorBanner)).toHaveText(workoutHoliday_content.errorBanner),
+//                     expect(page.locator(this.errorMessage)).toContainText(workoutHoliday_content.errorMessage),
+//                 ]);
     }
 }
 
