@@ -24,7 +24,10 @@ class HoursPerShiftPage {
         await Promise.all([
             expect(page.locator(this.title)).toHaveText(hoursPerShift_content.pageTitle),
         ]);
-        await axeTest(page);
+    }
+
+    async accessibility(page): Promise<void> {
+        axeTest(page);
     }
 
     async inputHours(page: Page): Promise<void> {

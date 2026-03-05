@@ -28,7 +28,6 @@ class CalculatedEntitlementPage {
             expect(page.locator(this.text)).toContainText(fullYearLeaveAnnualised_calculatedEntitlement_content.userListText),
        ]);
         await this.assertLinks(page);
-        await axeTest(page);
     }
 
     async checkStartAndLeaveSameYearShiftPatternPageLoads(page: Page): Promise<void> {
@@ -45,7 +44,6 @@ class CalculatedEntitlementPage {
             expect(page.locator('a', { hasText: common_calculatedEntitlement_content.guidanceLinkText })).toHaveAttribute('href', '/holiday-entitlement-rights')
        ]);
         await this.assertLinks(page);
-        await axeTest(page);
     }
 
     async assertLinks(page: Page): Promise<void> {
@@ -54,8 +52,12 @@ class CalculatedEntitlementPage {
             expect(page.locator('a', { hasText: common_calculatedEntitlement_content.holidayPayLinkText })).toHaveAttribute('href', '/holiday-entitlement-rights/holiday-pay-the-basics'),
             expect(page.locator('a', { hasText: common_calculatedEntitlement_content.guidanceLinkText })).toHaveAttribute('href', '/holiday-entitlement-rights')
        ]);
-        await axeTest(page);
     }
+
+    async accessibility(page): Promise<void> {
+        axeTest(page);
+   }
+
 }
 
 export default CalculatedEntitlementPage;

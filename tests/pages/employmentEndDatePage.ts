@@ -36,7 +36,10 @@ class EmploymentEndDatePage {
             expect(page.locator(this.monthText)).toContainText(employmentEndDate_content.monthText),
             expect(page.locator(this.yearText)).toContainText(employmentEndDate_content.yearText),
         ]);
-        await axeTest(page);
+    }
+
+    async accessibility(page): Promise<void> {
+        axeTest(page);
     }
 
     async inputDate(page: Page): Promise<void> {

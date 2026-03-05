@@ -25,8 +25,11 @@ class ShiftAmountPage {
         await Promise.all([
             expect(page.locator(this.title)).toHaveText(shiftAmount_content.pageTitle),
         ]);
-        await axeTest(page);
     }
+
+   async accessibility(page): Promise<void> {
+        axeTest(page);
+   }
 
     async inputShifts(page: Page): Promise<void> {
         await CommonFunctions.retriableFill(page, this.shiftAmountInput, "3");

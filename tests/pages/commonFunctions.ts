@@ -5,12 +5,13 @@ import {expect} from "@playwright/test";
 export class CommonFunctions {
 
     static async continueOn(page: Page, continuePageText: string): Promise<void> {
-        page.getByRole("button", { name: continuePageText}).click();
+        await page.getByRole('button', { name: continuePageText }).waitFor();
+        await page.getByRole("button", { name: continuePageText}).click();
     }
 
     static async assertErrorMessageExactMatch(page: Page, locator: string, text :string): Promise<void> {
         Promise.all([
-            expect(page.locator(locator)).toHaveText(text),
+            expect(page.locator(locator).first()).toHaveText(text),
         ]);
     }
 
@@ -20,7 +21,7 @@ export class CommonFunctions {
         ]);
     }
 
-    static async retriableFill(page: Page, locator: string, inputValue: string) {
+    static async retriableFill(page: Page, locator: string, inputValue: string): Promise<void> {
         let ok = false;
         const maxRetries = 3;
 
@@ -32,15 +33,14 @@ export class CommonFunctions {
         }
 
         if (!ok) {
-            throw new Error("Date inputs not populated after retries");
+            throw new Error("Input not populated after retries");
         }
     }
 
-    static async fillValue(page: Page, locator: string, inputValue: string) {
+    static async fillValue(page: Page, locator: string, inputValue: string): Promise<boolean> {
         await page.locator(locator).fill(inputValue);
         const actual = await page.locator(locator).inputValue();
         return actual === inputValue;
     }
-
 
 }

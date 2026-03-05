@@ -36,9 +36,11 @@ class EmploymentStartDatePage {
             expect(page.locator(this.monthText)).toContainText(employmentStartDate_content.monthText),
             expect(page.locator(this.yearText)).toContainText(employmentStartDate_content.yearText),
         ]);
-        await axeTest(page);
     }
 
+    async accessibility(page): Promise<void> {
+        axeTest(page);
+    }
     async inputDate(page: Page): Promise<void> {
         await CommonFunctions.retriableFill(page, this.dayInput, "1");
         await CommonFunctions.retriableFill(page, this.monthInput, "10");

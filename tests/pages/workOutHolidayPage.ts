@@ -45,9 +45,11 @@ class WorkOutHolidayPage {
             expect(page.locator(this.leavingPartWayThroughYearText)).toContainText(workoutHoliday_content.leavingPartWayThroughYearText),
             expect(page.locator(this.startingAndLeavingPartWayThroughYearText)).toContainText(workoutHoliday_content.startingAndLeavingPartWayThroughYearText),
         ]);
-        await axeTest(page);
     }
 
+   async accessibility(page): Promise<void> {
+        axeTest(page);
+   }
     async clickFullYear(page: Page): Promise<void> {
         await page.click(this.fullYearText);
     }

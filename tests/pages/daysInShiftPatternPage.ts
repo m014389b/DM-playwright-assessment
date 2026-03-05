@@ -42,6 +42,14 @@ class DaysInShiftPatternPage {
         await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, daysInShiftPattern_content.errorBanner);
         await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, daysInShiftPattern_content.errorMessage);
     }
+
+    async triggerInvalidDayErrorMessages(page: Page): Promise<void> {
+        await CommonFunctions.retriableFill(page, this.daysInShiftPatternInput, "1");
+        await this.continueOn(page);
+        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, daysInShiftPattern_content.errorBanner);
+        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, daysInShiftPattern_content.errorMessage_greaterThanShifts);
+    }
+
 }
 
 export default DaysInShiftPatternPage;

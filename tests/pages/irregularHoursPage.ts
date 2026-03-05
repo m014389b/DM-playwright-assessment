@@ -27,7 +27,10 @@ class IrregularHoursPage {
             expect(page.locator(this.radioButtonYes)).toContainText(irregularHours_content.radioYes),
             expect(page.locator(this.radioButtonNo)).toContainText(irregularHours_content.radioNo),
         ]);
-        await axeTest(page);
+    }
+
+    async accessibility(page): Promise<void> {
+        axeTest(page);
     }
 
     async clickYes(page: Page): Promise<void> {

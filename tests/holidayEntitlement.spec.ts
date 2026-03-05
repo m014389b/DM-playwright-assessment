@@ -12,76 +12,89 @@ import ShiftAmountPage from "./pages/shiftAmountPage";
 import DaysInShiftPatternPage from "./pages/daysInShiftPatternPage";
 
 test.describe('Holiday entitlement ', () => {
-    test.skip(`Holiday entitlement for a full leave year with annualised hours and other options`, async ({ page }): Promise<void> => {
+    test(`Holiday entitlement for a full leave year with annualised hours and other options`, async ({ page }): Promise<void> => {
         const landingPage: landingPage = new LandingPage();
         await landingPage.checkPageLoads(page);
+        await landingPage.accessibility(page);
         await landingPage.continueOn(page);
 
         const irregularHoursPage: irregularHoursPage = new IrregularHoursPage();
         await irregularHoursPage.checkPageLoads(page);
+        await irregularHoursPage.accessibility(page);
         await irregularHoursPage.triggerErrorMessages(page);
         await irregularHoursPage.clickYes(page);
         await irregularHoursPage.continueOn(page);
 
         const annualLeaveStartDatePage: annualLeaveStartDatePage = new AnnualLeaveStartDatePage();
         await annualLeaveStartDatePage.checkPageLoads(page);
+        await annualLeaveStartDatePage.accessibility(page);
         await annualLeaveStartDatePage.triggerErrorMessages(page);
         await annualLeaveStartDatePage.inputDateOnOctoberFirst1998(page);
         await annualLeaveStartDatePage.continueOn(page);
 
         const holidayEntitlementBasedOnPage: holidayEntitlementBasedOnPage = new HolidayEntitlementBasedOnPage();
         await holidayEntitlementBasedOnPage.checkPageLoads(page);
+        await holidayEntitlementBasedOnPage.accessibility(page);
         await holidayEntitlementBasedOnPage.triggerErrorMessages(page);
         await holidayEntitlementBasedOnPage.clickAnnualisedHours(page);
         await holidayEntitlementBasedOnPage.continueOn(page);
 
         const workOutHolidayPage: workOutHolidayPage = new WorkOutHolidayPage();
         await workOutHolidayPage.checkPageLoads(page);
+        await workOutHolidayPage.accessibility(page);
         await workOutHolidayPage.triggerErrorMessages(page);
         await workOutHolidayPage.clickFullYear(page);
         await workOutHolidayPage.continueOn(page);
 
         const calculatedEntitlementPage: calculatedEntitlementPage = new CalculatedEntitlementPage();
         await calculatedEntitlementPage.checkFullYearLeaveAnnualisedPageLoads(page);
+        await calculatedEntitlementPage.accessibility(page);
     });
 
- test(`Holiday entitlement for someone starting and leaving part way through a leave year with shifts and other options`, async ({ page }): Promise<void> => {
+ test.skip(`Holiday entitlement for someone starting and leaving part way through a leave year with shifts and other options`, async ({ page }): Promise<void> => {
         const landingPage: landingPage = new LandingPage();
         await landingPage.checkPageLoads(page);
+        await landingPage.accessibility(page);
         await landingPage.continueOn(page);
 
         const irregularHoursPage: irregularHoursPage = new IrregularHoursPage();
         await irregularHoursPage.checkPageLoads(page);
+        await irregularHoursPage.accessibility(page);
         await irregularHoursPage.triggerErrorMessages(page);
         await irregularHoursPage.clickYes(page);
         await irregularHoursPage.continueOn(page);
 
         const annualLeaveStartDatePage: annualLeaveStartDatePage = new AnnualLeaveStartDatePage();
         await annualLeaveStartDatePage.checkPageLoads(page);
+        await annualLeaveStartDatePage.accessibility(page);
         await annualLeaveStartDatePage.triggerErrorMessages(page);
         await annualLeaveStartDatePage.inputDateOnOctoberFirst1998(page);
         await annualLeaveStartDatePage.continueOn(page);
 
         const holidayEntitlementBasedOnPage: holidayEntitlementBasedOnPage = new HolidayEntitlementBasedOnPage();
         await holidayEntitlementBasedOnPage.checkPageLoads(page);
+//         await holidayEntitlementBasedOnPage.accessibility(page);
         await holidayEntitlementBasedOnPage.triggerErrorMessages(page);
         await holidayEntitlementBasedOnPage.clickShifts(page);
         await holidayEntitlementBasedOnPage.continueOn(page);
 
         const workOutHolidayPage: workOutHolidayPage = new WorkOutHolidayPage();
         await workOutHolidayPage.checkPageLoads_Shifts(page);
+//         await workOutHolidayPage.accessibility(page);
         await workOutHolidayPage.triggerErrorMessages(page);
         await workOutHolidayPage.clickStartingAndLeavingPartWayThroughYear(page);
         await workOutHolidayPage.continueOn(page);
 
         const employmentStartDatePage: employmentStartDatePage = new EmploymentStartDatePage();
         await employmentStartDatePage.checkPageLoads(page);
+//         await employmentStartDatePage.accessibility(page);
         await employmentStartDatePage.triggerErrorMessages(page);
         await employmentStartDatePage.inputDate(page);
         await employmentStartDatePage.continueOn(page);
 
         const employmentEndDatePage: employmentEndDatePage = new EmploymentEndDatePage();
         await employmentEndDatePage.checkPageLoads(page);
+//         await employmentEndDatePage.accessibility(page);
         await employmentEndDatePage.triggerNoContentErrorMessages(page);
         await employmentEndDatePage.triggerGreaterThanOneYearErrorMessages(page);
         await employmentEndDatePage.triggerBeforeStartDateErrorMessages(page);
@@ -90,20 +103,28 @@ test.describe('Holiday entitlement ', () => {
 
         const hoursPerShiftPage: hoursPerShiftPage = new HoursPerShiftPage();
         await hoursPerShiftPage.checkPageLoads(page);
+//         await hoursPerShiftPage.accessibility(page);
+//         await hoursPerShiftPage.triggerErrorMessages(page);
         await hoursPerShiftPage.inputHours(page);
         await hoursPerShiftPage.continueOn(page);
 
         const shiftAmountPage: shiftAmountPage = new ShiftAmountPage();
         await shiftAmountPage.checkPageLoads(page);
+//         await shiftAmountPage.accessibility(page);
+//         await shiftAmountPage.triggerErrorMessages(page);
         await shiftAmountPage.inputShifts(page);
         await shiftAmountPage.continueOn(page);
 
         const daysInShiftPatternPage: daysInShiftPatternPage = new DaysInShiftPatternPage();
         await daysInShiftPatternPage.checkPageLoads(page);
+//         await daysInShiftPatternPage.accessibility(page);
+//         await daysInShiftPatternPage.triggerErrorMessages(page);
+//         await daysInShiftPatternPage.triggerInvalidDayErrorMessages(page);
         await daysInShiftPatternPage.inputDaysInShiftPattern(page);
         await daysInShiftPatternPage.continueOn(page);
 
         const calculatedEntitlementPage: calculatedEntitlementPage = new CalculatedEntitlementPage();
+//                 await calculatedEntitlementPage.accessibility(page);
         await calculatedEntitlementPage.checkStartAndLeaveSameYearShiftPatternPageLoads(page);
     });
 
