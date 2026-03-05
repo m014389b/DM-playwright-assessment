@@ -36,25 +36,43 @@ class EmploymentEndDatePage {
             expect(page.locator(this.monthText)).toContainText(employmentEndDate_content.monthText),
             expect(page.locator(this.yearText)).toContainText(employmentEndDate_content.yearText),
         ]);
-//         await axeTest(page);
+        await axeTest(page);
     }
 
     async inputDate(page: Page): Promise<void> {
-        await page.locator(this.dayInput).fill("1");
-        await page.locator(this.monthInput).fill("2");
-        await page.locator(this.yearInput).fill("2026");
+        await CommonFunctions.retriableFill(page, this.dayInput, "1");
+        await CommonFunctions.retriableFill(page, this.monthInput, "2");
+        await CommonFunctions.retriableFill(page, this.yearInput, "2026");
     }
 
    async continueOn(page: Page): Promise<void> {
         CommonFunctions.continueOn(page, this.continueButtonLabel);
     }
 
-    async triggerErrorMessages(page: Page): Promise<void> {
+    async triggerNoContentErrorMessages(page: Page): Promise<void> {
         await this.continueOn(page);
-        await Promise.all([
-            expect(page.locator(this.errorBanner)).toHaveText(annualLeaveStartDate_content.errorBanner),
-            expect(page.locator(this.errorMessage).first()).toContainText(annualLeaveStartDate_content.errorMessage),
-        ]);
+        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, employmentEndDate_content.errorBanner);
+        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, employmentEndDate_content.errorMessage);
+    }
+
+    async triggerGreaterThanOneYearErrorMessages(page: Page): Promise<void> {
+        await CommonFunctions.retriableFill(page, this.dayInput, "1");
+        await CommonFunctions.retriableFill(page, this.monthInput, "1");
+        await CommonFunctions.retriableFill(page, this.yearInput, "2027");
+        await this.continueOn(page);
+
+        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, employmentEndDate_content.errorBanner);
+        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, employmentEndDate_content.errorMessage_MoreThanOneYearAfterStartDate);
+    }
+
+    async triggerBeforeStartDateErrorMessages(page: Page): Promise<void> {
+        await CommonFunctions.retriableFill(page, this.dayInput, "1");
+        await CommonFunctions.retriableFill(page, this.monthInput, "1");
+        await CommonFunctions.retriableFill(page, this.yearInput, "2024");
+        await this.continueOn(page);
+
+        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, employmentEndDate_content.errorBanner);
+        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, employmentEndDate_content.errorMessage_BeforeStartDate);
     }
 }
 

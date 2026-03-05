@@ -36,13 +36,13 @@ class EmploymentStartDatePage {
             expect(page.locator(this.monthText)).toContainText(employmentStartDate_content.monthText),
             expect(page.locator(this.yearText)).toContainText(employmentStartDate_content.yearText),
         ]);
-//         await axeTest(page);
+        await axeTest(page);
     }
 
     async inputDate(page: Page): Promise<void> {
-        await page.locator(this.dayInput).fill("1");
-        await page.locator(this.monthInput).fill("10");
-        await page.locator(this.yearInput).fill("2025");
+        await CommonFunctions.retriableFill(page, this.dayInput, "1");
+        await CommonFunctions.retriableFill(page, this.monthInput, "10");
+        await CommonFunctions.retriableFill(page, this.yearInput, "2025");
     }
 
    async continueOn(page: Page): Promise<void> {
@@ -51,10 +51,8 @@ class EmploymentStartDatePage {
 
     async triggerErrorMessages(page: Page): Promise<void> {
         await this.continueOn(page);
-        await Promise.all([
-            expect(page.locator(this.errorBanner)).toHaveText(annualLeaveStartDate_content.errorBanner),
-            expect(page.locator(this.errorMessage).first()).toContainText(annualLeaveStartDate_content.errorMessage),
-        ]);
+        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, employmentStartDate_content.errorBanner);
+        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, employmentStartDate_content.errorMessage);
     }
 }
 

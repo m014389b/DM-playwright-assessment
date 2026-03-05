@@ -24,11 +24,11 @@ class HoursPerShiftPage {
         await Promise.all([
             expect(page.locator(this.title)).toHaveText(hoursPerShift_content.pageTitle),
         ]);
-//         await axeTest(page);
+        await axeTest(page);
     }
 
     async inputHours(page: Page): Promise<void> {
-        await page.locator(this.hoursPerShiftInput).fill("1");
+        await CommonFunctions.retriableFill(page, this.hoursPerShiftInput, "1");
     }
 
    async continueOn(page: Page): Promise<void> {
@@ -37,10 +37,8 @@ class HoursPerShiftPage {
 
     async triggerErrorMessages(page: Page): Promise<void> {
         await this.continueOn(page);
-        await Promise.all([
-            expect(page.locator(this.errorBanner)).toHaveText(hoursPerShift_content.errorBanner),
-            expect(page.locator(this.errorMessage).first()).toContainText(hoursPerShift_content.errorMessage),
-        ]);
+        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, hoursPerShift_content.errorBanner);
+        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, hoursPerShift_content.errorMessage);
     }
 }
 

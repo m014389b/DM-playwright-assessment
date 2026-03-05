@@ -26,11 +26,11 @@ class DaysInShiftPatternPage {
             expect(page.locator(this.title)).toHaveText(daysInShiftPattern_content.pageTitle),
             expect(page.locator(CommonConstants.TEXT_CLASS)).toContainText(daysInShiftPattern_content.divText),
         ]);
-//         await axeTest(page);
+        await axeTest(page);
     }
 
     async inputDaysInShiftPattern(page: Page): Promise<void> {
-        await page.locator(this.daysInShiftPatternInput).fill("5");
+        await CommonFunctions.retriableFill(page, this.daysInShiftPatternInput, "5");
     }
 
    async continueOn(page: Page): Promise<void> {
@@ -39,10 +39,8 @@ class DaysInShiftPatternPage {
 
     async triggerErrorMessages(page: Page): Promise<void> {
         await this.continueOn(page);
-        await Promise.all([
-            expect(page.locator(this.errorBanner)).toHaveText(daysInShiftPattern_content.errorBanner),
-            expect(page.locator(this.errorMessage).first()).toContainText(daysInShiftPattern_content.errorMessage),
-        ]);
+        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, daysInShiftPattern_content.errorBanner);
+        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, daysInShiftPattern_content.errorMessage);
     }
 }
 

@@ -45,7 +45,7 @@ class WorkOutHolidayPage {
             expect(page.locator(this.leavingPartWayThroughYearText)).toContainText(workoutHoliday_content.leavingPartWayThroughYearText),
             expect(page.locator(this.startingAndLeavingPartWayThroughYearText)).toContainText(workoutHoliday_content.startingAndLeavingPartWayThroughYearText),
         ]);
-//         await axeTest(page);
+        await axeTest(page);
     }
 
     async clickFullYear(page: Page): Promise<void> {
@@ -60,7 +60,7 @@ class WorkOutHolidayPage {
         await page.click(this.leavingPartWayThroughYearText);
     }
 
-    async clickStartingAndLeavingPartWayThroughYearText(page: Page): Promise<void> {
+    async clickStartingAndLeavingPartWayThroughYear(page: Page): Promise<void> {
         await page.click(this.startingAndLeavingPartWayThroughYearText);
     }
 
@@ -70,11 +70,8 @@ class WorkOutHolidayPage {
 
     async triggerErrorMessages(page: Page): Promise<void> {
         await this.continueOn(page);
-        await CommonFunctions.triggerErrorMessages(page, this.errorBanner, workoutHoliday_content.errorBanner, this.errorMessage, workoutHoliday_content.errorMessage)
-//             await Promise.all([
-//                     expect(page.locator(this.errorBanner)).toHaveText(workoutHoliday_content.errorBanner),
-//                     expect(page.locator(this.errorMessage)).toContainText(workoutHoliday_content.errorMessage),
-//                 ]);
+        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, workoutHoliday_content.errorBanner)
+        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, workoutHoliday_content.errorMessage)
     }
 }
 

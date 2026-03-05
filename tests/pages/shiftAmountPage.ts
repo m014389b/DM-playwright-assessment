@@ -25,11 +25,11 @@ class ShiftAmountPage {
         await Promise.all([
             expect(page.locator(this.title)).toHaveText(shiftAmount_content.pageTitle),
         ]);
-//         await axeTest(page);
+        await axeTest(page);
     }
 
     async inputShifts(page: Page): Promise<void> {
-        await page.locator(this.shiftAmountInput).fill("3");
+        await CommonFunctions.retriableFill(page, this.shiftAmountInput, "3");
     }
 
    async continueOn(page: Page): Promise<void> {
@@ -38,10 +38,8 @@ class ShiftAmountPage {
 
     async triggerErrorMessages(page: Page): Promise<void> {
         await this.continueOn(page);
-        await Promise.all([
-            expect(page.locator(this.errorBanner)).toHaveText(shiftAmount_content.errorBanner),
-            expect(page.locator(this.errorMessage).first()).toContainText(shiftAmount_content.errorMessage),
-        ]);
+        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, shiftAmount_content.errorBanner);
+        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, shiftAmount_content.errorMessage);
     }
 }
 

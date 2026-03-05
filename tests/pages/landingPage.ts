@@ -1,5 +1,5 @@
 import { Page } from 'playwright';
-import {expect} from "@playwright/test";
+import { expect } from "@playwright/test";
 import landingPage_content from "../content/landingPage_content";
 import axeTest from "../accessibilityTestHelper";
 import { CommonConstants } from "../content/common_constants"
@@ -26,7 +26,7 @@ class LandingPage {
             expect(page.locator(this.text)).toContainText(landingPage_content.liText1),
             expect(page.locator(this.text)).toContainText(landingPage_content.liText2),
         ]);
-//         await axeTest(page);
+        await axeTest(page);
     }
 
     async continueOn(page: Page): Promise<void> {
