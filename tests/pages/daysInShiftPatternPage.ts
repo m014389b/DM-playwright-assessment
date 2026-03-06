@@ -45,9 +45,9 @@ class DaysInShiftPatternPage {
         await CommonFunctions.retriableFill(page, this.daysInShiftPatternInput, "1");
         await CommonFunctions.continueOn(page, this.continueButtonLabel);
         await Promise.all([
-                    expect(page.locator(this.errorBanner)).toHaveText(daysInShiftPattern_content.errorBanner),
-                    expect(page.locator(this.errorMessage).first()).toContainText(daysInShiftPattern_content.errorMessage_greaterThanShifts),
-                ]);
+                expect(page.locator(this.errorBanner)).toHaveText(daysInShiftPattern_content.errorBanner),
+                expect(page.locator(this.errorMessage).first()).toContainText(daysInShiftPattern_content.errorMessage_greaterThanShifts),
+            ]);
     }
 
 }
