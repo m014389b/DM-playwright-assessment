@@ -37,17 +37,17 @@ class DaysInShiftPatternPage {
         CommonFunctions.continueOn(page, this.continueButtonLabel);
     }
 
-    async triggerErrorMessages(page: Page): Promise<void> {
-        await this.continueOn(page);
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, daysInShiftPattern_content.errorBanner);
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, daysInShiftPattern_content.errorMessage);
+    async accessibility(page): Promise<void> {
+        axeTest(page);
     }
 
     async triggerInvalidDayErrorMessages(page: Page): Promise<void> {
         await CommonFunctions.retriableFill(page, this.daysInShiftPatternInput, "1");
-        await this.continueOn(page);
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, daysInShiftPattern_content.errorBanner);
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, daysInShiftPattern_content.errorMessage_greaterThanShifts);
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+                    expect(page.locator(this.errorBanner)).toHaveText(daysInShiftPattern_content.errorBanner),
+                    expect(page.locator(this.errorMessage).first()).toContainText(daysInShiftPattern_content.errorMessage_greaterThanShifts),
+                ]);
     }
 
 }

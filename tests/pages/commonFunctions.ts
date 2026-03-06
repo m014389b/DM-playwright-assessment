@@ -5,20 +5,7 @@ import {expect} from "@playwright/test";
 export class CommonFunctions {
 
     static async continueOn(page: Page, continuePageText: string): Promise<void> {
-        await page.getByRole('button', { name: continuePageText }).waitFor();
         await page.getByRole("button", { name: continuePageText}).click();
-    }
-
-    static async assertErrorMessageExactMatch(page: Page, locator: string, text :string): Promise<void> {
-        Promise.all([
-            expect(page.locator(locator).first()).toHaveText(text),
-        ]);
-    }
-
-    static async assertErrorMessagesContainMatch(page: Page, locator: string, text :string): Promise<void> {
-        Promise.all([
-            expect(page.locator(locator).first()).toContainText(text),
-        ]);
     }
 
     static async retriableFill(page: Page, locator: string, inputValue: string): Promise<void> {

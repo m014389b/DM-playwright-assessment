@@ -52,9 +52,11 @@ class EmploymentStartDatePage {
     }
 
     async triggerErrorMessages(page: Page): Promise<void> {
-        await this.continueOn(page);
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, employmentStartDate_content.errorBanner);
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, employmentStartDate_content.errorMessage);
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+                expect(page.locator(this.errorBanner)).toHaveText(employmentStartDate_content.errorBanner),
+                expect(page.locator(this.errorMessage).first()).toContainText(employmentStartDate_content.errorMessage),
+            ]);
     }
 }
 

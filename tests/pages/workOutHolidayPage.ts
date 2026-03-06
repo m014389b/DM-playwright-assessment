@@ -45,6 +45,7 @@ class WorkOutHolidayPage {
             expect(page.locator(this.leavingPartWayThroughYearText)).toContainText(workoutHoliday_content.leavingPartWayThroughYearText),
             expect(page.locator(this.startingAndLeavingPartWayThroughYearText)).toContainText(workoutHoliday_content.startingAndLeavingPartWayThroughYearText),
         ]);
+        await axeTest(page);
     }
 
    async accessibility(page): Promise<void> {
@@ -71,9 +72,11 @@ class WorkOutHolidayPage {
     }
 
     async triggerErrorMessages(page: Page): Promise<void> {
-        await this.continueOn(page);
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, workoutHoliday_content.errorBanner)
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, workoutHoliday_content.errorMessage)
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+                expect(page.locator(this.errorBanner)).toHaveText(workoutHoliday_content.errorBanner),
+                expect(page.locator(this.errorMessage)).toContainText(workoutHoliday_content.errorMessage),
+            ]);
     }
 }
 

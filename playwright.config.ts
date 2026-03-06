@@ -8,7 +8,7 @@ module.exports = defineConfig({
 
   timeout: 5 * 60 * 1000,
   expect: {
-    timeout: 60 * 3000,
+    timeout: 60 * 1000,
   },
   reportSlowTests: null,
 

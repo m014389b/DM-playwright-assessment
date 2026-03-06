@@ -27,10 +27,11 @@ class IrregularHoursPage {
             expect(page.locator(this.radioButtonYes)).toContainText(irregularHours_content.radioYes),
             expect(page.locator(this.radioButtonNo)).toContainText(irregularHours_content.radioNo),
         ]);
+        await axeTest(page);
     }
 
     async accessibility(page): Promise<void> {
-        axeTest(page);
+
     }
 
     async clickYes(page: Page): Promise<void> {
@@ -46,9 +47,11 @@ class IrregularHoursPage {
     }
 
     async triggerErrorMessages(page: Page): Promise<void> {
-        await this.continueOn(page);
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, irregularHours_content.errorBanner)
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, irregularHours_content.errorMessage)
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+            expect(page.locator(this.errorBanner)).toHaveText(irregularHours_content.errorBanner),
+            expect(page.locator(this.errorMessage).first()).toContainText(irregularHours_content.errorMessage),
+        ]);
     }
 }
 

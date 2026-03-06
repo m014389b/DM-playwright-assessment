@@ -26,6 +26,7 @@ class LandingPage {
             expect(page.locator(this.text)).toContainText(landingPage_content.liText1),
             expect(page.locator(this.text)).toContainText(landingPage_content.liText2),
         ]);
+     await axeTest(page);
     }
 
     async accessibility(page): Promise<void> {

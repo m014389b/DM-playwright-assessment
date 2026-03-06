@@ -39,9 +39,11 @@ class HoursPerShiftPage {
     }
 
     async triggerErrorMessages(page: Page): Promise<void> {
-        await this.continueOn(page);
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, hoursPerShift_content.errorBanner);
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, hoursPerShift_content.errorMessage);
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+                expect(page.locator(this.errorBanner)).toHaveText(hoursPerShift_content.errorBanner),
+                expect(page.locator(this.errorMessage).first()).toContainText(hoursPerShift_content.errorMessage),
+            ]);
     }
 }
 

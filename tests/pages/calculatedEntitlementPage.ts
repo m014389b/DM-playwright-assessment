@@ -27,6 +27,7 @@ class CalculatedEntitlementPage {
             expect(page.locator(this.text)).toContainText(fullYearLeaveAnnualised_calculatedEntitlement_content.userText),
             expect(page.locator(this.text)).toContainText(fullYearLeaveAnnualised_calculatedEntitlement_content.userListText),
        ]);
+        await axeTest(page);
         await this.assertLinks(page);
     }
 
@@ -43,6 +44,7 @@ class CalculatedEntitlementPage {
             expect(page.locator('a', { hasText: common_calculatedEntitlement_content.holidayPayLinkText })).toHaveAttribute('href', '/holiday-entitlement-rights/holiday-pay-the-basics'),
             expect(page.locator('a', { hasText: common_calculatedEntitlement_content.guidanceLinkText })).toHaveAttribute('href', '/holiday-entitlement-rights')
        ]);
+        await axeTest(page);
         await this.assertLinks(page);
     }
 

@@ -40,9 +40,11 @@ class ShiftAmountPage {
     }
 
     async triggerErrorMessages(page: Page): Promise<void> {
-        await this.continueOn(page);
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, shiftAmount_content.errorBanner);
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, shiftAmount_content.errorMessage);
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+                expect(page.locator(this.errorBanner)).toHaveText(shiftAmount_content.errorBanner),
+                expect(page.locator(this.errorMessage).first()).toContainText(shiftAmount_content.errorMessage),
+             ]);
     }
 }
 

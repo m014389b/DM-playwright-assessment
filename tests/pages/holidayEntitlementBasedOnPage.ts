@@ -36,6 +36,7 @@ class HolidayEntitlementBasedOnPage {
             expect(page.locator(this.radioButtonCompressedHours)).toContainText(holidayEntitlementBasedOn_content.radioCompressedHours),
             expect(page.locator(this.radioButtonShifts)).toContainText(holidayEntitlementBasedOn_content.radioShifts),
         ]);
+        await axeTest(page);
     }
 
     async accessibility(page): Promise<void> {
@@ -67,9 +68,11 @@ class HolidayEntitlementBasedOnPage {
     }
 
     async triggerErrorMessages(page: Page): Promise<void> {
-        await this.continueOn(page);
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, holidayEntitlementBasedOn_content.errorBanner);
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, holidayEntitlementBasedOn_content.errorMessage);
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+                expect(page.locator(this.errorBanner)).toHaveText(holidayEntitlementBasedOn_content.errorBanner),
+                expect(page.locator(this.errorMessage).first()).toContainText(holidayEntitlementBasedOn_content.errorMessage),
+            ]);
     }
 }
 

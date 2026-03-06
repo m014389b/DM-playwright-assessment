@@ -53,30 +53,35 @@ class EmploymentEndDatePage {
     }
 
     async triggerNoContentErrorMessages(page: Page): Promise<void> {
-        await this.continueOn(page);
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, employmentEndDate_content.errorBanner);
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, employmentEndDate_content.errorMessage);
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+            expect(page.locator(this.errorBanner)).toHaveText(employmentEndDate_content.errorBanner),
+            expect(page.locator(this.errorMessage).first()).toContainText(employmentEndDate_content.errorMessage),
+        ]);
     }
 
     async triggerGreaterThanOneYearErrorMessages(page: Page): Promise<void> {
         await CommonFunctions.retriableFill(page, this.dayInput, "1");
         await CommonFunctions.retriableFill(page, this.monthInput, "1");
         await CommonFunctions.retriableFill(page, this.yearInput, "2027");
-        await this.continueOn(page);
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+            expect(page.locator(this.errorBanner)).toHaveText(employmentEndDate_content.errorBanner),
+            expect(page.locator(this.errorMessage).first()).toContainText(employmentEndDate_content.errorMessage_MoreThanOneYearAfterStartDate),
+            ]);
 
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, employmentEndDate_content.errorBanner);
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, employmentEndDate_content.errorMessage_MoreThanOneYearAfterStartDate);
     }
 
     async triggerBeforeStartDateErrorMessages(page: Page): Promise<void> {
         await CommonFunctions.retriableFill(page, this.dayInput, "1");
         await CommonFunctions.retriableFill(page, this.monthInput, "1");
         await CommonFunctions.retriableFill(page, this.yearInput, "2024");
-        await this.continueOn(page);
-
-        await CommonFunctions.assertErrorMessageExactMatch(page, this.errorBanner, employmentEndDate_content.errorBanner);
-        await CommonFunctions.assertErrorMessagesContainMatch(page, this.errorMessage, employmentEndDate_content.errorMessage_BeforeStartDate);
-    }
+        await CommonFunctions.continueOn(page, this.continueButtonLabel);
+        await Promise.all([
+                expect(page.locator(this.errorBanner)).toHaveText(employmentEndDate_content.errorBanner),
+                expect(page.locator(this.errorMessage).first()).toContainText(employmentEndDate_content.errorMessage_BeforeStartDate),
+            ]);
+  }
 }
 
 export default EmploymentEndDatePage;
